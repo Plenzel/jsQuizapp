@@ -72,3 +72,16 @@ function showQuestion(){
     document.getElementById("answer_3").innerHTML = question["answer_3"];
     document.getElementById("answer_4").innerHTML = question["answer_4"];
 }
+
+function answer(selection){
+    let selectedQuestionNumber = selection.slice(-1);
+    let idOfRightAnswer = `answer_${questions[currentQuestion]["right_answer"]}`;
+    console.log(idOfRightAnswer)
+    if(selectedQuestionNumber == questions[currentQuestion]["right_answer"]){
+        document.getElementById(selection).classList.add("bg-success");
+    } else {
+        document.getElementById(selection).parentNode.classList.add("bg-danger");
+        document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success");
+    }
+
+}
