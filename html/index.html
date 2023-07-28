@@ -21,36 +21,41 @@
     <div class="container">
         <div class="card quiz-card">
             <img src="../img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body">
+            
+            <div class="card-body" id="endScreen" style="display: none;">
+              Quiz beendet!
+            </div>
+            
+            <div class="card-body" id="question-body">
               <h5 class="card-title" id="questiontext">Frage</h5>
               
               <div class="card quiz-answer-card mb-2" onclick='answer("answer_1")'>
                 <div id="answer_1" class="card-body">
-                  Andtwort
+                  "Antwort"
                 </div>
               </div>
 
               <div class="card quiz-answer-card mb-2" onclick='answer("answer_2")'>
                 <div id="answer_2" class="card-body">
-                  Andtwort
+                  Antwort
                 </div>
               </div>
 
               <div class="card quiz-answer-card mb-2" onclick='answer("answer_3")'>
                 <div id="answer_3" class="card-body">
-                  Andtwort
+                  Antwort
                 </div>
               </div>
 
               <div class="card quiz-answer-card mb-2" onclick='answer("answer_4")'>
                 <div id="answer_4" class="card-body">
-                  Andtwort
+                  Antwort
                 </div>
               </div>
 
               <div class="question-footer">
-                <span><b>1</b> von <b id="all-questions">5</b> Fragen</span>
-                <button class="btn btn-primary">Nächste Frage</button>
+                <span><b id="question-number">1</b> von <b id="all-questions">5</b> Fragen</span>
+                <button class="btn btn-primary" id="next-button" disabled onclick="nextQuestion()">Nächste Frage</button>
               </div>
 
             </div>

@@ -9,18 +9,18 @@ let questions = [
     },
     {
         "question": "Was ist der Zweck der HTML-Sprache?",
-        "answer_1": "Grafikdesign",
+        "answer_1": "Grafikdesign erstellen",
         "answer_2": "Audio-Streaming",
-        "answer_3": "Webentwicklung",
-        "answer_4": "Filmproduktion",
+        "answer_3": "Webseiten erstellen",
+        "answer_4": "Filme produzieren",
         "right_answer": 3
     },
     {
         "question": "Welches HTML-Element wird verwendet, um eine Überschrift erster Ordnung (H1) zu erstellen?",
-        "answer_1": "<h1>",
-        "answer_2": "<head>",
-        "answer_3": "<p>",
-        "answer_4": "<br>",
+        "answer_1": "h1",
+        "answer_2": "head",
+        "answer_3": "p",
+        "answer_4": "br",
         "right_answer": 1
     },
     {
@@ -33,26 +33,26 @@ let questions = [
     },
     {
         "question": "Welche HTML-Auszeichnung wird verwendet, um ein Bild einzufügen?",
-        "answer_1": "<img>",
-        "answer_2": "<picture>",
-        "answer_3": "<image>",
-        "answer_4": "<src>",
+        "answer_1": "img",
+        "answer_2": "picture",
+        "answer_3": "image",
+        "answer_4": "src",
         "right_answer": 1
     },
     {
         "question": "Welches HTML-Element wird verwendet, um eine geordnete Liste zu erstellen?",
-        "answer_1": "<ul>",
-        "answer_2": "<ol>",
-        "answer_3": "<li>",
-        "answer_4": "<dl>",
+        "answer_1": "ul",
+        "answer_2": "ol",
+        "answer_3": "li",
+        "answer_4": "dl",
         "right_answer": 2
     },
     {
         "question": "Was ist die richtige HTML-Struktur für ein einfaches HTML-Dokument?",
-        "answer_1": "<header>, <body>, <footer>",
-        "answer_2": "<head>, <main>, <footer>",
-        "answer_3": "<title>, <content>, <end>",
-        "answer_4": "<doctype>, <html>, <body>",
+        "answer_1": "header, body, footer",
+        "answer_2": "head, main, footer",
+        "answer_3": "title, content, end",
+        "answer_4": "doctype, html, body",
         "right_answer": 4
     }
 ]
@@ -65,23 +65,46 @@ function init(){
 }
 
 function showQuestion(){
-    let question = questions[currentQuestion];
-    document.getElementById("questiontext").innerHTML = question["question"];
-    document.getElementById("answer_1").innerHTML = question["answer_1"];
-    document.getElementById("answer_2").innerHTML = question["answer_2"];
-    document.getElementById("answer_3").innerHTML = question["answer_3"];
-    document.getElementById("answer_4").innerHTML = question["answer_4"];
+    console.log("Aktuelle Frage:" + currentQuestion)
+    if(currentQuestion >= questions.length){
+        document.getElementById("endScreen").style = "";
+        document.getElementById("question-body").style = "display: none;"
+    } else {
+        let question = questions[currentQuestion];
+        document.getElementById("question-number").innerHTML = currentQuestion+1;
+        document.getElementById("questiontext").innerHTML = question["question"];
+        document.getElementById("answer_1").innerHTML = question["answer_1"];
+        document.getElementById("answer_2").innerHTML = question["answer_2"];
+        document.getElementById("answer_3").innerHTML = question["answer_3"];
+        document.getElementById("answer_4").innerHTML = question["answer_4"];    
+    }
+
 }
 
 function answer(selection){
+    let question = questions[currentQuestion];
     let selectedQuestionNumber = selection.slice(-1);
-    let idOfRightAnswer = `answer_${questions[currentQuestion]["right_answer"]}`;
+    let idOfRightAnswer = `answer_${question["right_answer"]}`;
     console.log(idOfRightAnswer)
-    if(selectedQuestionNumber == questions[currentQuestion]["right_answer"]){
-        document.getElementById(selection).classList.add("bg-success");
+    if(selectedQuestionNumber == question["right_answer"]){
+        document.getElementById(selection).parentNode.classList.add("bg-success");
     } else {
         document.getElementById(selection).parentNode.classList.add("bg-danger");
         document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success");
     }
+    document.getElementById("next-button").disabled = false;
+}
 
+function nextQuestion(){
+    resetAnswerButtons();
+    currentQuestion++;
+    showQuestion();
+    document.getElementById("next-button").disabled = true;
+}
+
+function resetAnswerButtons(){
+    for(let i = 1; i < 5; i++){
+        document.getElementById("answer_"+i).parentNode.classList.remove("bg-success");
+        document.getElementById("answer_"+i).parentNode.classList.remove("bg-danger");
+    }
 }
