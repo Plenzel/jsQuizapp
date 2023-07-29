@@ -58,6 +58,7 @@ let questions = [
 ]
 
 let currentQuestion = 0;
+let countCorrect = 0;
 
 function init(){
     document.getElementById("all-questions").innerHTML = questions.length;
@@ -69,6 +70,7 @@ function showQuestion(){
     if(currentQuestion >= questions.length){
         document.getElementById("endScreen").style = "";
         document.getElementById("question-body").style = "display: none;"
+        showResult();
     } else {
         let question = questions[currentQuestion];
         document.getElementById("question-number").innerHTML = currentQuestion+1;
@@ -88,6 +90,7 @@ function answer(selection){
     console.log(idOfRightAnswer)
     if(selectedQuestionNumber == question["right_answer"]){
         document.getElementById(selection).parentNode.classList.add("bg-success");
+        countCorrect++;
     } else {
         document.getElementById(selection).parentNode.classList.add("bg-danger");
         document.getElementById(idOfRightAnswer).parentNode.classList.add("bg-success");
@@ -107,4 +110,10 @@ function resetAnswerButtons(){
         document.getElementById("answer_"+i).parentNode.classList.remove("bg-success");
         document.getElementById("answer_"+i).parentNode.classList.remove("bg-danger");
     }
+}
+
+function showResult(){
+    document.getElementById("all-questions-result").innerHTML = questions.length;
+    document.getElementById("question-number-result").innerHTML = countCorrect;
+    document.getElementById("header-image").src = "../img/trophy.png"
 }
