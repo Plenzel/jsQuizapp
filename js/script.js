@@ -72,6 +72,11 @@ function showQuestion(){
         document.getElementById("question-body").style = "display: none;"
         showResult();
     } else {
+
+        let percent = (currentQuestion + 1) / questions.length * 100;
+        document.getElementById("progress-bar").innerHTML = Math.round(percent);
+        document.getElementById("progress-bar").style = `width: ${percent}%;`;
+
         let question = questions[currentQuestion];
         document.getElementById("question-number").innerHTML = currentQuestion+1;
         document.getElementById("questiontext").innerHTML = question["question"];
@@ -116,4 +121,13 @@ function showResult(){
     document.getElementById("all-questions-result").innerHTML = questions.length;
     document.getElementById("question-number-result").innerHTML = countCorrect;
     document.getElementById("header-image").src = "../img/trophy.png"
+}
+
+function restartGame(){
+    document.getElementById("header-image").src = "../img/logo.png";
+    currentQuestion = 0;
+    countCorrect = 0;
+    document.getElementById("endScreen").style = "display: none";
+    document.getElementById("question-body").style = "";
+    init();
 }

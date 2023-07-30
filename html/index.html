@@ -22,9 +22,14 @@
         <div class="card quiz-card">
             <img id="header-image" src="../img/logo.png" class="card-img-top" alt="...">
             
+            <div class="progress">
+              <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+            </div>
+
             <div class="card-body" id="endScreen" style="display: none;">
               <div class="div-center"> Quiz beendet! </div>
               <div class="div-center">Du hast <b id="question-number-result">XXX</b> von <b id="all-questions-result">XXX</b> Fragen richtig beantwortet.</div>
+              <div class="button-row"><button class="btn btn-primary" id="restart-button" onclick="restartGame()">Erneut spielen</button></div>
             </div>
             
             <div class="card-body" id="question-body">
